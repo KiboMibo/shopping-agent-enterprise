@@ -112,6 +112,80 @@
 
 Изменения публикуются в [CHANGELOG.md](CHANGELOG.md).
 
+## Установка
+
+### 1. System prompt
+
+Скопируй нужный вариант промпта в своего агента:
+
+- `prompt/SYSTEM_PROMPT.md` — полный;
+- `prompt/COMPACT_PROMPT.md` — компактный.
+
+### 2. Market Search MCP
+
+Агенту нужен инструмент поиска по магазинам. Используй
+[market-search-mcp](https://github.com/KiboMibo/market-search-mcp):
+
+```bash
+git clone https://github.com/KiboMibo/market-search-mcp.git ~/Projects/market-search-mcp
+cd ~/Projects/market-search-mcp
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -e '.[test]'
+```
+
+Проверка:
+
+```bash
+.venv/bin/python -m pytest -q
+.venv/bin/python scripts/smoke_mcp.py
+```
+
+### 3. Подключение к Hermes
+
+Добавь в `~/.hermes/config.yaml`:
+
+```yaml
+mcp_servers:
+  market_search:
+    command: ~/Projects/market-search-mcp/.venv/bin/market-search-mcp
+    args: []
+    timeout: 180
+    connect_timeout: 60
+```
+
+Перезапусти gateway:
+
+```bash
+hermes gateway restart
+```
+
+Доступные tools:
+
+```text
+market_capabilities      — поддерживаемые действия и ограничения API
+market_search            — поиск по магазинам (merchant adapter + SerpAPI)
+market_checkout_link     — ссылка на товар для ручного оформления
+market_create_order      — проверка возможности заказа через API
+```
+
+### 4. SerpAPI (опционально)
+
+Для поиска через Google Shopping:
+
+```bash
+export SERPAPI_KEY=your_key   # https://serpapi.com/manage-api-key
+```
+
+Без ключа работают direct merchant adapters (DNS, Citilink, ВсеИнструменты,
+М.Видео, Эльдорадо, Леруа Мерлен, Петрович, Золотое Яблоко, Аптека.ру).
+
+### 5. Свои магазины (опционально)
+
+```bash
+export MARKET_MERCHANTS='[{"market":"store","search_url":"https://store.ru/search?q={query}"}]'
+```
+
 ## Лицензия
 
 Проект распространяется по лицензии MIT. См. [LICENSE](LICENSE).
