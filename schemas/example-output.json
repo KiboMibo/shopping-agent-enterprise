@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "query": {
+    "original": "Пример запроса",
+    "normalized_name": "Пример товара",
+    "region": "Москва и Московская область",
+    "conditions": [
+      "new"
+    ]
+  },
+  "checked_at": "2026-07-10T12:00:00+03:00",
+  "result_status": "partial",
+  "offers": [
+    {
+      "rank": 1,
+      "title": "Пример подтверждённого предложения",
+      "url": "https://example.com/product",
+      "source": "Пример магазина",
+      "condition": "new",
+      "variant_fingerprint": {
+        "brand": "Пример",
+        "model": "Model 1",
+        "modification": null,
+        "size_or_capacity": null,
+        "color": null,
+        "regional_version": null,
+        "article": "EXAMPLE-1"
+      },
+      "price": {
+        "item": 10000,
+        "delivery": 500,
+        "fees": 0,
+        "discount": 0,
+        "guaranteed_cashback": 0,
+        "total": 10500,
+        "currency": "RUB",
+        "evidence_level": "E2"
+      },
+      "shipping_region": "Москва",
+      "seller": {
+        "name": "Пример продавца",
+        "rating": null,
+        "rating_count": null,
+        "official_status": "unconfirmed"
+      },
+      "authenticity": {
+        "level": "insufficient_data",
+        "counterfeit_risk": 40,
+        "reasons": [
+          "Официальный статус продавца не подтверждён"
+        ]
+      },
+      "scores": {
+        "reliability_score": 65,
+        "match_score": 95,
+        "seller_risk": 35,
+        "counterfeit_risk": 40,
+        "deal_quality": 70,
+        "data_confidence": 55
+      },
+      "recommendation_status": "recommended_with_checks",
+      "evidence": [
+        {
+          "field": "price.item",
+          "level": "E2",
+          "source": "https://example.com/product",
+          "checked_at": "2026-07-10T12:00:00+03:00"
+        }
+      ],
+      "warnings": [
+        "Гарантия производителя не подтверждена"
+      ]
+    }
+  ],
+  "alternatives": [],
+  "unconfirmed_fields": [
+    "rating продавца",
+    "гарантия производителя"
+  ],
+  "warnings": [
+    "Пример предназначен только для демонстрации структуры"
+  ]
+}

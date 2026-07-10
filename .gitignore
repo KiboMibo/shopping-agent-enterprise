@@ -39,3 +39,10 @@ node_modules/
 coverage/
 dist/
 build/
+# Локальные AI-инструменты
+.omo/
+.opencode/
+
+# Локальные отчёты
+validation-report.txt
+

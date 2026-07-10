@@ -1,0 +1,43 @@
+name: Quality
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Проверка спецификации
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Получить репозиторий
+        uses: actions/checkout@v4
+
+      - name: Настроить Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Проверить спецификацию
+        run: python scripts/validate_spec.py
+
+      - name: Проверить JSON-пример
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("schemas/example-output.json")
+          json.loads(path.read_text(encoding="utf-8"))
+          print("JSON корректен:", path)
+          PY
