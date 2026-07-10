@@ -1,6 +1,11 @@
 # Операционные системы
 .DS_Store
 Thumbs.db
+git push -u origin main
+
+.omo
+.opencode
+init_repo.py
 
 # Редакторы
 .idea/
